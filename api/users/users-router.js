@@ -60,12 +60,16 @@ router.delete('/:id',validateUserId ,(req, res) => {
   })
 });
 
-router.get('/:id/posts', (req, res) => {
+router.get('/:id/posts',validateUserId,(req, res) => {
   // RETURN THE ARRAY OF USER POSTS
   // this needs a middleware to verify user id
+  Post.get()
+  .then(post => { 
+    res.json(post)
+  })
 });
 
-router.post('/:id/posts', (req, res) => {
+router.post('/:id/posts',validateUserId, validatePost ,(req, res) => {
   // RETURN THE NEWLY CREATED USER POST
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
