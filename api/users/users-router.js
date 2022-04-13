@@ -36,10 +36,19 @@ router.post('/',validateUser ,(req, res) => {
 
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id',validateUserId ,(req, res) => {
   // RETURN THE FRESHLY UPDATED USER OBJECT
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
+  User.update(req.params.id, req.body)
+  .then(newUser => {
+    res.status(200).json(newUser); 
+  })
+  .catch(err => {
+    res.status(400).json({ message: "missing required name" })
+  })
+
+
 });
 
 router.delete('/:id', (req, res) => {

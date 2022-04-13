@@ -15,6 +15,7 @@
     "dependencies": {
         "@vscode/sqlite3": "^5.0.8",
         "express": "^4.17.3",
+        "httpie": "^1.1.2",
         "knex": "^1.0.3"
     },
     "devDependencies": {
