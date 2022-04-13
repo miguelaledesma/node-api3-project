@@ -13,9 +13,9 @@ function logger(req, res, next) {
 function validateUserId(req, res, next) {
   // DO YOUR MAGIC
   User.getById(req.params.id)
-  .then(userId => {
-    if(userId){
-      req.user = userId; 
+  .then(user => {
+    if(user){
+      req.user = user; 
       next()
     } else{
       res.status(404).json({ message: "user not found" })
