@@ -12,10 +12,27 @@ function logger(req, res, next) {
 
 function validateUserId(req, res, next) {
   // DO YOUR MAGIC
+  User.getById(req.params.id)
+  .then(userId => {
+    if(userId){
+      req.user = userId; 
+      next()
+    } else{
+      res.status(404).json({ message: "user not found" })
+    }
+  })
+  .catch()
 }
 
 function validateUser(req, res, next) {
   // DO YOUR MAGIC
+  if( typeof req.body.name !== 'string' || req.body.name.trim() == '' ){
+    res.status(400).json({ message: "missing required name field" }) 
+    return 
+  }
+  req.user = { name: req.body.name.trim()}
+
+  next(); 
 }
 
 function validatePost(req, res, next) {
